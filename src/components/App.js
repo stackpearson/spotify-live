@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
 import Login from './Login';
+import PrivateRoute from '../utils/PrivateRoute';
 import {getToken} from '../utils/auth-entry';
 import Dashboard from './Dashboard';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {connect} from 'react-redux';
 import {setUser, setToken} from '../actions/userActions';
-import {useHistory} from 'react-router-dom'
+import {Route, Switch, useHistory} from 'react-router-dom';
 
 
 function App(props) {
 
-  // let history = useHistory();
+  let history = useHistory();
 
  const getUser = () => {
     axiosWithAuth()
@@ -18,6 +19,7 @@ function App(props) {
     .then(info => {
         console.log('succesful get', info)
         props.setUser(info.data.display_name)
+        history.push('/dashboard')
     })
     .catch(error => {
         console.log('failed get', error)
@@ -33,20 +35,16 @@ function App(props) {
     getUser()
   }, [])
 
-  // useEffect(() => {
-  //   history.pushState()
-  // }, [props.authToken])
 
 
-  return (
-    <div className="App">
-      {props.userOnProps.authToken ? (
-        <Dashboard />
-      ):(
-        <Login />
-        )}
-    </div>
-  );
+
+  return (<>
+    <Switch>
+      <Route exact path='/' component={Login} />
+      <PrivateRoute path='/dashboard' component={Dashboard} />
+    </Switch>
+  </>);
+
 }
 
 const mapStateToProps = state => {
