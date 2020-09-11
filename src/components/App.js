@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import Login from './Login';
+import Nav from './Nav';
+import Playlists from './Playlists';
 import PrivateRoute from '../utils/PrivateRoute';
 import {getToken} from '../utils/auth-entry';
 import Dashboard from './Dashboard';
@@ -39,10 +41,19 @@ function App(props) {
 
 
   return (<>
+    {props.userOnProps.isLoggedIn ? (
+      <Nav />
+    ) : (
+      <></>
+    )}
+  
     <Switch>
       <Route exact path='/' component={Login} />
       <PrivateRoute path='/dashboard' component={Dashboard} />
+      <PrivateRoute path='/playlists' component={Playlists} />
     </Switch>
+
+   
   </>);
 
 }

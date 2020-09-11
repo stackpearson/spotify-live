@@ -4,15 +4,12 @@ export const clientId = '4b69df84c5df4a6b9378d28c996ca783';
 // export const clientSecret = '80982f9c61d6462291425536567e2867';
 
 export const scopes = [
-    'user-read-currently-playing',
-    'user-read-recently-played',
-    'playlist-read-collaborative',
-    'user-modify-playback-state',
-    'playlist-read-private'
+    'user-top-read'
+    
 
 ];
 
-export const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scopre=${scopes.join('%20')}&response_type=token&show_dialog=true`;
+export const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`;
 
 
 export const getToken = () => {

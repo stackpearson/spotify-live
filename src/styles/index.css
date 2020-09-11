@@ -86,7 +86,7 @@ h1 {
 .login-container {
 	position: absolute;
 	top: 50%;
-	transform: translateY(50%);
+	transform: translateY(45%);
 }
 
 .login-page {
@@ -130,9 +130,51 @@ h1 {
 	text-align: center;
 	background-color: black;
 	border-radius: 10px;
+	text-decoration: none;
+	color: white;
 }
 
 .logout:hover {
 	background-color: #1DB954;
 	color: black;
 }
+
+/* dashboard styles */
+.song-container {
+	margin: 0 auto;
+	max-width: 600px;
+}
+
+/* TopSong Styles */
+
+.individual-song-container {
+	display: flex;
+	margin: 5px;
+	justify-content: space-between;
+	align-content: flex-start;
+}
+
+.song-img {
+	height: 200px;
+	width: 200px;
+}
+
+.song-info p {
+	color: white;
+	font-size: 16px;
+}
+
+.title p {
+	font-weight: 900;
+	font-size: 18px;
+}
+
+.song-info {
+	display: flex;
+	margin: 0 auto;
+	flex-direction: column;
+	align-content: flex-start;
+	justify-content: center;
+	text-align: left;
+}
+

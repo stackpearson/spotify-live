@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {logOut} from '../actions/userActions';
 
 const Nav = (props) => {
@@ -7,10 +8,11 @@ const Nav = (props) => {
 
 
     return (<>
+    
         <div className='nav-bar'>
             <div className='user-box'>
                 <span>{props.userOnProps.user}</span>
-                <span className='logout' onClick = {() => props.logOut()}>Logout</span>
+                <Link to='/' className='logout' onClick = {() => props.logOut()}>Logout</Link>
             </div>
         </div>
         
