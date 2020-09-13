@@ -11,7 +11,11 @@ const TopSong = (props) => {
                 </div>
                 <div className='artist'>
                     <p>{props.songData.artists[0].name}</p>
-                </div>  
+                </div>
+                <div className='functionality'>
+                    <div className='similar'>Similar</div>
+                    <div className='features'>Features</div>
+                </div>
             </div>
         </div>
     </>)

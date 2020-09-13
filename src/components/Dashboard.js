@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
-import SpotifyWebApi from 'spotify-web-api-js';
 import TopSong from './TopSong';
 import {setFaveSongs} from '../actions/favesActions';
 
 const Dashboard = (props) => {
-    const Spotify = new SpotifyWebApi()
-    const auth = localStorage.getItem('auth-token')
 
     useEffect(() => { 
       axiosWithAuth()
@@ -22,21 +19,20 @@ const Dashboard = (props) => {
     
 
     return (<>
-    {/* {props.favesOnProps.favoriteSongs ? (
+        {props.favesOnProps.favoriteSongs ? (<>
 
-        <h2>Just a moment while we grab your top music!</h2>
+        <h2 className='dashboard-header'>Your Top Tracks</h2>
 
-    ) : (<> */}
-
-    <h2>Check out your top tracks!</h2>
         <div className='song-container'> 
         {props.favesOnProps.favoriteSongs.map((song) => (
-            <TopSong songData={song} />
-        ))}
-            
+            <TopSong key={song.id} songData={song} />
+        ))}  
         </div>
 
-    {/* </>)} */}
+        </>) : (
+
+        <h2>Just a moment while we grab your top music!</h2>
+        )}
     
     </>)
 }

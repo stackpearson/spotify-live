@@ -4,7 +4,10 @@ export const clientId = '4b69df84c5df4a6b9378d28c996ca783';
 // export const clientSecret = '80982f9c61d6462291425536567e2867';
 
 export const scopes = [
-    'user-top-read'
+    'user-top-read',
+    'user-read-currently-playing',
+    'user-read-playback-state',
+    'user-modify-playback-state'
     
 
 ];
