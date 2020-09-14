@@ -4,6 +4,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {setGraphData} from '../actions/graphActions';
+import Spinner from 'react-bootstrap/Spinner'
 
 const SuggestedSong = (props) => {
     const [songData, setSongData] = useState()
@@ -55,7 +56,9 @@ const SuggestedSong = (props) => {
            </div>
     ) : ( 
 
-        <p>just a moment while we load your song details</p> 
+        <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+        </Spinner>
     )}
  
     </>)

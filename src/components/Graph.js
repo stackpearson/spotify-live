@@ -3,6 +3,7 @@ import CanvasJSReact from '../canvasjs.react';
 import {connect} from 'react-redux';
 import {setGraphData, purgeOptions} from '../actions/graphActions';
 import {useHistory} from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner'
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -42,7 +43,9 @@ const Graph = (props) => {
                     <CanvasJSChart options = {options} />
                 </div>
         ) : (
-            <p>Just a moment while we load some stuff</p>
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
         )}
 
     </>)

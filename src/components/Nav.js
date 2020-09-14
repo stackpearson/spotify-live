@@ -68,9 +68,16 @@ const Nav = (props) => {
 
     useEffect(() => {
         getSong();
-    }, [songName, timeStamp])
+        // delaySongPull()
+    }, [])
+
+    // const delaySongPull = () => {
+    //     setTimeout(getSong, props.playbackOnProps.timeRemaining);
+    // }
 
     setTimeout(getSong, props.playbackOnProps.timeRemaining);
+
+    
     
     
 
