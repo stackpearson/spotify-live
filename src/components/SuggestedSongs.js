@@ -20,7 +20,7 @@ useEffect(() => {
         {props.songOnProps.suggestions ? (
             <div>
                 {props.songOnProps.suggestionIds.map(song => (
-                <div>
+                <div className='song-container'>
                     <SuggestedSong key={song} songId={song} />
                 </div>
             ))}

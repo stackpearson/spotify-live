@@ -10,6 +10,7 @@ import {connect} from 'react-redux';
 import {setUser, setToken} from '../actions/userActions';
 import {Route, Switch, useHistory} from 'react-router-dom';
 import SuggestedSongs from './SuggestedSongs';
+import Graph from './Graph';
 
 
 function App(props) {
@@ -53,6 +54,7 @@ function App(props) {
       <PrivateRoute path='/dashboard' component={Dashboard} />
       <PrivateRoute path='/playlists' component={Playlists} />
       <PrivateRoute path='/suggestions' component={SuggestedSongs} />
+      <PrivateRoute path='/visuals' component={Graph} />
     </Switch>
 
    

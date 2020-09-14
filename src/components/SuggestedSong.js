@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
+import axios from 'axios';
 import {connect} from 'react-redux';
+import {useHistory} from 'react-router-dom';
+import {setGraphData} from '../actions/graphActions';
 
 const SuggestedSong = (props) => {
     const [songData, setSongData] = useState()
@@ -15,13 +18,26 @@ const SuggestedSong = (props) => {
         .catch(err => {
             console.log(err)
         })
-    })
+    }, [])
+
+    let history = useHistory();
+    const getVisual = () => {
+        axios 
+        .get(`https://ds-bw-spotify.herokuapp.com/features/${encodeURI(songData.name)}`)
+        .then((res) => {
+            console.log('visuals', res)
+            props.setGraphData(res.data.features)
+        })
+        .catch((res) => {
+            console.log('failed visuals', res)
+        })
+    }
 
 
     return(<>
 
     {songData ? (
-               <div className='individual-song-container'>
+            <div className='individual-song-container'>
                <div className='song-img'>
                    <img alt='album artwork' className='img' src={songData.album.images[1].url} />
                </div>
@@ -33,7 +49,7 @@ const SuggestedSong = (props) => {
                        <p>{songData.artists[0].name}</p>
                    </div>
                    <div className='functionality'>
-                       <div className='features'>Features</div>
+                       <div className='features' onClick={() => {getVisual(); history.push('/visuals')}}>Features</div>
                    </div>
                </div>
            </div>
@@ -53,5 +69,5 @@ const mapStateToProps = state => {
   
   export default connect(
     mapStateToProps,
-    {}
+    {setGraphData}
   )(SuggestedSong)
