@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logOut} from '../actions/userActions';
@@ -7,33 +7,20 @@ import {setSongData, setTime, setPause, setPlay} from '../actions/playbackAction
 
 const Nav = (props) => {
 
-    // const getSong = () => {
-    //     axiosWithAuth()
-    //     .get('me/player/currently-playing')
-    //     .then(res => {
-    //         console.log('song pull', res)
-    //         props.setSongData(res.data)
-    //         props.setTime((res.data.item.duration_ms - res.data.progress_ms))
-    //     })
-    //     .catch(error => {
-    //         console.log(error)
-    //     }) 
-    // }
+    const [songName, setSongName] = useState()
 
-   
-        const getSong = async () => {
-            try {
-                let resp = await axiosWithAuth().get('/me/player/currently-playing');
-                console.log('succesful song pull', resp.data);
-                props.setSongData(resp.data)
-                props.setTime((resp.data.item.duration_ms - resp.data.progress_ms))
-            } catch (err) {
-                console.log('failed getsong', err)
-            } 
-  
-        };
+    const getSong = async () => {
+        try {
+            let resp = await axiosWithAuth().get('/me/player/currently-playing');
+            console.log('succesful song pull', resp.data);
+            props.setSongData(resp.data)
+            props.setTime(((resp.data.item.duration_ms - resp.data.progress_ms) + 100))
+            setSongName(resp.data.item.name)
+        } catch (err) {
+            console.log('failed getsong', err)
+        } 
 
-  
+    };
 
     const pauseSong = () => {
         axiosWithAuth()
@@ -49,7 +36,7 @@ const Nav = (props) => {
         .put('/me/player/play')
         .then(res => {
             props.setPlay()
-            props.setTime(1000)
+            props.setTime(1500)
         })
     }
 
@@ -58,7 +45,7 @@ const Nav = (props) => {
         .post('/me/player/next')
         .then(res => {
             console.log(res)
-            props.setTime(1000)
+            props.setTime(1500)
         })
         .catch(error => {
             console.log('failed skip', error)
@@ -70,7 +57,7 @@ const Nav = (props) => {
         .post('/me/player/previous')
         .then(res => {
             console.log(res)
-            props.setTime(1000)
+            props.setTime(1500)
         })
         .catch(error => {
             console.log('failed back', error)
@@ -82,6 +69,8 @@ const Nav = (props) => {
     }, [])
 
     setTimeout(getSong, props.playbackOnProps.timeRemaining)
+
+    
 
     return (<>
     

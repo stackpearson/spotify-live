@@ -1,6 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {setActiveFave, setSuggestions} from '../actions/favesActions';
 
 const TopSong = (props) => {
+
 
     return(<>
         <div className='individual-song-container'>
@@ -13,7 +17,7 @@ const TopSong = (props) => {
                     <p>{props.songData.artists[0].name}</p>
                 </div>
                 <div className='functionality'>
-                    <div className='similar'>Similar</div>
+                    <div className='similar' onClick={() => {props.setActiveFave(props.songData);}}><Link to='/suggestions'>Similar</Link></div>
                     <div className='features'>Features</div>
                 </div>
             </div>
@@ -22,4 +26,13 @@ const TopSong = (props) => {
 
 }
 
-export default TopSong;
+const mapStateToProps = state => {
+    return {
+        favesOnProps: state.favesReducer
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    {setActiveFave, setSuggestions}
+  )(TopSong)

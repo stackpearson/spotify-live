@@ -9,6 +9,7 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {connect} from 'react-redux';
 import {setUser, setToken} from '../actions/userActions';
 import {Route, Switch, useHistory} from 'react-router-dom';
+import SuggestedSongs from './SuggestedSongs';
 
 
 function App(props) {
@@ -51,6 +52,7 @@ function App(props) {
       <Route exact path='/' component={Login} />
       <PrivateRoute path='/dashboard' component={Dashboard} />
       <PrivateRoute path='/playlists' component={Playlists} />
+      <PrivateRoute path='/suggestions' component={SuggestedSongs} />
     </Switch>
 
    

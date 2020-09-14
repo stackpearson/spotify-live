@@ -32,6 +32,12 @@ export const playbackReducer = (state = initialState, action) => {
                 isPlaying: true,
             };
 
+        case 'PURGE_DATA':
+            return {
+                ...state,
+                initialState
+            }
+
             default:
                 return state;
     }
