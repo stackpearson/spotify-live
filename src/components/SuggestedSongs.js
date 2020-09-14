@@ -3,8 +3,11 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 import {setSuggestions, setSuggestionIds} from '../actions/favesActions';
 import SuggestedSong from './SuggestedSong';
+import {useHistory} from 'react-router-dom';
 
 const SuggestedSongs = (props) => {
+
+    let history = useHistory();
 
 useEffect(() => {
     axios
@@ -17,7 +20,10 @@ useEffect(() => {
 }, [])
 
     return(<>
-        {props.songOnProps.suggestions ? (
+        {props.songOnProps.suggestions ? (<>
+            <div className='graph-functionality' onClick={() => history.goBack()}>
+                X
+            </div>
             <div>
                 {props.songOnProps.suggestionIds.map(song => (
                 <div className='song-container'>
@@ -28,7 +34,7 @@ useEffect(() => {
            
             
 
-        ) : (
+        </>) : (
             <p>Just a moment while we suggest some new music</p>
         )}
     </>)

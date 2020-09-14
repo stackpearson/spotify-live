@@ -287,7 +287,8 @@ h1 {
     background-color: grey;
     padding: 5px 10px 5px 10px;
     border-radius: 10px;
-    margin: 5px;
+	margin: 5px;
+	cursor: pointer;
 }
 
 .graph-functionality:hover {
@@ -300,7 +301,6 @@ h1 {
 		flex-direction: column-reverse;
 		justify-content: center;
 		align-items: center;
-		text-align: center;
 	}
 
 	.song-info {
