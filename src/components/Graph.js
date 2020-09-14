@@ -34,7 +34,7 @@ const Graph = (props) => {
 
     return(<>
 
-        {props.graphOnProps ? (
+        {props.graphOnProps.dataPoints ? (
                     <div className='graph-container'>
                     <div className='graph-functionality' onClick={() => {props.purgeOptions(); history.goBack()}}>
                         x

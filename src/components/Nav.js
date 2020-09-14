@@ -14,7 +14,7 @@ const Nav = (props) => {
             let resp = await axiosWithAuth().get('/me/player/currently-playing');
             console.log('succesful song pull', resp.data);
             props.setSongData(resp.data)
-            props.setTime(((resp.data.item.duration_ms - resp.data.progress_ms) + 100))
+            props.setTime(((resp.data.item.duration_ms - resp.data.progress_ms) + 25))
             setSongName(resp.data.item.name)
         } catch (err) {
             console.log('failed getsong', err)
@@ -27,7 +27,6 @@ const Nav = (props) => {
         .put('/me/player/pause')
         .then(res => {
             props.setPause()
-            console.log(res)
         })
     }
 
@@ -36,7 +35,7 @@ const Nav = (props) => {
         .put('/me/player/play')
         .then(res => {
             props.setPlay()
-            props.setTime(1500)
+            getSong()
         })
     }
 
@@ -45,7 +44,7 @@ const Nav = (props) => {
         .post('/me/player/next')
         .then(res => {
             console.log(res)
-            props.setTime(1500)
+            getSong()
         })
         .catch(error => {
             console.log('failed skip', error)
@@ -57,7 +56,7 @@ const Nav = (props) => {
         .post('/me/player/previous')
         .then(res => {
             console.log(res)
-            props.setTime(1500)
+            getSong()
         })
         .catch(error => {
             console.log('failed back', error)
@@ -66,9 +65,10 @@ const Nav = (props) => {
 
     useEffect(() => {
         getSong()
-    }, [])
+        setTimeout(getSong, props.playbackOnProps.timeRemaining)
+    }, [songName])
 
-    setTimeout(getSong, props.playbackOnProps.timeRemaining)
+    
 
     
 

@@ -137,6 +137,7 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	max-width: 350px;
 }
 
 .playback-control {
@@ -269,11 +270,37 @@ h1 {
 
 }
 
+/* graph styles */
+
+.graph-container {
+	max-width: 700px;
+    margin: 0 auto;
+}
+
+.graph-functionality {
+	position: relative;
+    display: inline-block;
+    top: 0%;
+    left: 95%;
+    font-weight: 900;
+    border: 1px solid black;
+    background-color: grey;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.graph-functionality:hover {
+	background-color: black;
+    color: white;
+}
+
 @media screen and (max-width: 600px) {
 	.individual-song-container {
 		flex-direction: column-reverse;
 		justify-content: center;
 		align-items: center;
+		text-align: center;
 	}
 
 	.song-info {
@@ -283,6 +310,28 @@ h1 {
 	.song-img {
 		height: 150px;
 		width: 150px;
+	}
+}
+
+@media screen and (max-width: 715px) {
+	.graph-container {
+		max-width: 500px;
+	}
+}
+
+@media screen and (max-width: 530px) {
+	.graph-container {
+		max-width: 350px;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	.user-box {
+		display: none;
+	}
+
+	.playback-box {
+		position: relative;
 	}
 }
 

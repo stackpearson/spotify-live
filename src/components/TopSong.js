@@ -1,9 +1,27 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 import {connect} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 import {setActiveFave, setSuggestions} from '../actions/favesActions';
+import {setGraphData} from '../actions/graphActions';
+
 
 const TopSong = (props) => {
+
+    let history = useHistory();
+
+    const getVisual = () => {
+        axios 
+        .get(`https://ds-bw-spotify.herokuapp.com/features/${encodeURI(props.songData.name)}`)
+        .then((res) => {
+            console.log('visuals', res)
+            props.setGraphData(res.data.features)
+        })
+        .catch((res) => {
+            console.log('failed visuals', res)
+        })
+    }
 
 
     return(<>
@@ -18,7 +36,7 @@ const TopSong = (props) => {
                 </div>
                 <div className='functionality'>
                     <div className='similar' onClick={() => {props.setActiveFave(props.songData);}}><Link to='/suggestions'>Similar</Link></div>
-                    <div className='features'>Features</div>
+                    <div className='features' onClick={() => {getVisual(); history.push('/visuals')}}>Features</div>
                 </div>
             </div>
         </div>
@@ -34,5 +52,5 @@ const mapStateToProps = state => {
   
   export default connect(
     mapStateToProps,
-    {setActiveFave, setSuggestions}
+    {setActiveFave, setSuggestions, setGraphData}
   )(TopSong)
