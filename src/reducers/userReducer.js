@@ -16,7 +16,9 @@ export const userReducer = (state = initialState, action) => {
         case 'SET_TOKEN':
             return {
                 ...state,
-                authToken: action.payload
+                isLoggedIn: true,
+                authToken: action.payload,
+                user: localStorage.getItem('user-name')
             }
 
         case 'LOG_OUT':

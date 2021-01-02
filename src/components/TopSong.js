@@ -35,7 +35,6 @@ const TopSong = (props) => {
                     <p>{props.songData.artists[0].name}</p>
                 </div>
                 <div className='functionality'>
-                    <div className='similar' onClick={() => {props.setActiveFave(props.songData);}}><Link to='/suggestions'>Similar</Link></div>
                     <div className='features' onClick={() => {getVisual(); history.push('/visuals')}}>Features</div>
                 </div>
             </div>
