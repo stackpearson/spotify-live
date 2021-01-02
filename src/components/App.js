@@ -9,7 +9,6 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {connect} from 'react-redux';
 import {setUser, setToken} from '../actions/userActions';
 import {Route, Switch, useHistory} from 'react-router-dom';
-import SuggestedSongs from './SuggestedSongs';
 import Graph from './Graph';
 
 
@@ -23,6 +22,7 @@ function App(props) {
     .then(info => {
         console.log('succesful get', info)
         props.setUser(info.data.display_name)
+        localStorage.setItem('user-name', info.data.display_name)
         history.push('/dashboard')
     })
     .catch(error => {
@@ -53,7 +53,6 @@ function App(props) {
       <Route exact path='/' component={Login} />
       <PrivateRoute path='/dashboard' component={Dashboard} />
       <PrivateRoute path='/playlists' component={Playlists} />
-      <PrivateRoute path='/suggestions' component={SuggestedSongs} />
       <PrivateRoute path='/visuals' component={Graph} />
     </Switch>
 

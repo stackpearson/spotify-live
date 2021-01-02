@@ -35,7 +35,7 @@ const Graph = (props) => {
 
     return(<>
 
-        {props.graphOnProps.dataPoints ? (
+        {props.graphOnProps.dataPoints.energy ? (
                     <div className='graph-container'>
                     <div className='graph-functionality' onClick={() => {props.purgeOptions(); history.goBack()}}>
                         x
@@ -43,9 +43,12 @@ const Graph = (props) => {
                     <CanvasJSChart options = {options} />
                 </div>
         ) : (
-            <Spinner animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-            </Spinner>
+            
+                <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
+            
+
         )}
 
     </>)

@@ -4,16 +4,20 @@ import {Link} from 'react-router-dom';
 import {logOut} from '../actions/userActions';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {setSongData, setTime, setPause, setPlay} from '../actions/playbackActions';
+import {DropdownButton} from 'react-bootstrap';
+import {Dropdown} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Nav = (props) => {
 
     const [songName, setSongName] = useState()
     const [timeStamp, setTimeStamp] = useState()
+    const [devices, setDevices] = useState()
 
     const getSong = async () => {
         try {
             let resp = await axiosWithAuth().get('/me/player/currently-playing');
-            console.log('succesful song pull', resp.data);
+            // console.log('succesful song pull', resp.data);
             props.setSongData(resp.data)
             props.setTime(((resp.data.item.duration_ms - resp.data.progress_ms) + 1000))
             setTimeStamp(resp.data.timestamp)
@@ -23,6 +27,14 @@ const Nav = (props) => {
         } 
 
     };
+
+    const showDevices = () => {
+        axiosWithAuth()
+        .get('/me/player/devices')
+        .then(res => {
+            setDevices(res.data.devices)
+        })
+    }
 
     const pauseSong = () => {
         axiosWithAuth()
@@ -38,7 +50,7 @@ const Nav = (props) => {
         .put('/me/player/play')
         .then(res => {
             props.setPlay()
-            props.setTime(1500)
+            delayedSongPull()
         })
     }
 
@@ -46,8 +58,9 @@ const Nav = (props) => {
         axiosWithAuth()
         .post('/me/player/next')
         .then(res => {
-            console.log(res)
+            // console.log(res)
             props.setTime(1500)
+            delayedSongPull()
         })
         .catch(error => {
             console.log('failed skip', error)
@@ -58,8 +71,8 @@ const Nav = (props) => {
         axiosWithAuth()
         .post('/me/player/previous')
         .then(res => {
-            console.log(res)
-            props.setTime(1500)
+            // console.log(res)
+            delayedSongPull()
         })
         .catch(error => {
             console.log('failed back', error)
@@ -68,12 +81,12 @@ const Nav = (props) => {
 
     useEffect(() => {
         getSong();
-        // delaySongPull()
+        showDevices()
     }, [])
 
-    // const delaySongPull = () => {
-    //     setTimeout(getSong, props.playbackOnProps.timeRemaining);
-    // }
+    const delayedSongPull = () => {
+        setTimeout(getSong, props.playbackOnProps.timeRemaining);
+    }
 
     setTimeout(getSong, props.playbackOnProps.timeRemaining);
 
@@ -88,6 +101,8 @@ const Nav = (props) => {
     return (<>
     
         <div className='nav-bar'>
+
+            
             {props.playbackOnProps.songData.is_playing ? (
             <div className='playback-box'>
                 <div className='current-image'>
@@ -109,7 +124,27 @@ const Nav = (props) => {
 
             ) : (
 
-                <p>Spin up some music, you can control it here!</p>
+            <div className='playback-box'>
+                <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic" >
+                    <span onClick={() => showDevices()}>Devices</span>
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    { devices ? (
+                        <>{devices.map(device => {
+                            
+                            return (
+                                <Dropdown.Item onClick={() => getSong()}>{device.name} - {(device.is_active) ? 'Play Here' : ''} </Dropdown.Item>
+                            )
+                        })}</>
+                    ) : (
+                        <p>No devices</p>
+                    )}
+     
+                </Dropdown.Menu>
+                </Dropdown>
+            </div>
 
             )}
     

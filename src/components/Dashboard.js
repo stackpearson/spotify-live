@@ -19,6 +19,7 @@ const Dashboard = (props) => {
     
 
     return (<>
+    
         {props.favesOnProps.favoriteSongs ? (<>
 
         <h2 className='dashboard-header'>Your Top Tracks</h2>
