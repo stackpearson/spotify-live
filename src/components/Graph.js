@@ -42,14 +42,15 @@ const Graph = (props) => {
                     </div>
                     <CanvasJSChart options = {options} />
                 </div>
-        ) : (
+        ) : (<>
             
                 <Spinner animation="border" role="status">
                     <span className="sr-only">Loading...</span>
                 </Spinner>
+                <h2>Initial graph retrivial may take up to 30 seconds</h2>
             
 
-        )}
+        </>)}
 
     </>)
 }

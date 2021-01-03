@@ -14,6 +14,11 @@ const Nav = (props) => {
     const [timeStamp, setTimeStamp] = useState()
     const [devices, setDevices] = useState()
 
+    useEffect(() => {
+        getSong();
+        showDevices()
+    }, [])
+
     const getSong = async () => {
         try {
             let resp = await axiosWithAuth().get('/me/player/currently-playing');
@@ -79,16 +84,9 @@ const Nav = (props) => {
         })
     }
 
-    useEffect(() => {
-        getSong();
-        showDevices()
-    }, [])
-
     const delayedSongPull = () => {
         setTimeout(getSong, props.playbackOnProps.timeRemaining);
     }
-
-    setTimeout(getSong, props.playbackOnProps.timeRemaining);
 
     
     

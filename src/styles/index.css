@@ -130,8 +130,8 @@ table {
 
 /* app styles below */
 html {
-  background-color: #262728;
-  color: white;
+  background-color: #262728 !important;
+  color: white !important;
 }
 
 .img {
@@ -150,6 +150,7 @@ h1 {
   font-size: 30px;
   font-weight: 900;
 }
+
 .link-container {
   display: inline-block;
   padding: 10px;
