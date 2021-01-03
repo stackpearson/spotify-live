@@ -134,6 +134,10 @@ html {
   color: white !important;
 }
 
+#root {
+  background-color: #262728;
+}
+
 .img {
   display: block;
   max-width: 100%;
@@ -142,13 +146,14 @@ html {
 
 a {
   text-decoration: none;
-  color: white;
+  color: white !important;
 }
 
 /* Login Styles */
 h1 {
   font-size: 30px;
   font-weight: 900;
+  color: white;
 }
 
 .link-container {
@@ -190,6 +195,9 @@ h1 {
 }
 
 /* Nav styles */
+.dropdown-item {
+  color: black !important;
+}
 .nav-bar {
   position: sticky;
   top: 0;
@@ -269,9 +277,13 @@ h1 {
   color: white;
 }
 
+.devices {
+  color: black;
+}
+
 .logout {
   padding: 5px;
-  max-width: 50px;
+  max-width: 70px;
   text-align: center;
   background-color: black;
   border-radius: 10px;
@@ -295,6 +307,7 @@ h1 {
   font-size: 20px;
   font-weight: 700;
   text-align: center;
+  color: white;
 }
 
 /* TopSong Styles */
@@ -338,11 +351,12 @@ h1 {
 
 .similar,
 .features {
-  width: 60px;
+  width: 70px;
   background-color: #1db954;
   padding: 5px;
   margin: 5px;
   border-radius: 10px;
+  color: white;
 }
 
 .similar:hover,

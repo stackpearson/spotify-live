@@ -76,7 +76,7 @@ const Nav = (props) => {
         axiosWithAuth()
         .post('/me/player/previous')
         .then(res => {
-            // console.log(res)
+            props.setTime(1500)
             delayedSongPull()
         })
         .catch(error => {
@@ -88,6 +88,8 @@ const Nav = (props) => {
         setTimeout(getSong, props.playbackOnProps.timeRemaining);
     }
 
+    setTimeout(getSong, props.playbackOnProps.timeRemaining);
+
     
     
     
@@ -98,7 +100,7 @@ const Nav = (props) => {
 
     return (<>
     
-        <div className='nav-bar'>
+        <nav className='nav-bar'>
 
             
             {props.playbackOnProps.songData.is_playing ? (
@@ -133,7 +135,7 @@ const Nav = (props) => {
                         <>{devices.map(device => {
                             
                             return (
-                                <Dropdown.Item onClick={() => getSong()}>{device.name} - {(device.is_active) ? 'Play Here' : ''} </Dropdown.Item>
+                                <Dropdown.Item onClick={() => getSong()}>{device.name} {(device.is_active) ? '- Play Here' : ''} </Dropdown.Item>
                             )
                         })}</>
                     ) : (
@@ -150,7 +152,7 @@ const Nav = (props) => {
                 <span>{props.userOnProps.user}</span>
                 <Link to='/' className='logout' onClick = {() => props.logOut()}>Logout</Link>
             </div>
-        </div>
+        </nav>
         
     </>)
 }
