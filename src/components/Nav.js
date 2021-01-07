@@ -87,7 +87,7 @@ const Nav = (props) => {
         setTimeout(getSong, 1500);
     }
 
-    setTimeout(getSong, props.playbackOnProps.timeRemaining || 1500);
+    setTimeout(getSong, props.playbackOnProps.timeRemaining || 60000);
 
     
     
