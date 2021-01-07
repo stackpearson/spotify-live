@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 import {logOut} from '../actions/userActions';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {setSongData, setTime, setPause, setPlay} from '../actions/playbackActions';
-import {DropdownButton} from 'react-bootstrap';
 import {Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -85,10 +84,10 @@ const Nav = (props) => {
     }
 
     const delayedSongPull = () => {
-        setTimeout(getSong, props.playbackOnProps.timeRemaining);
+        setTimeout(getSong, 1500);
     }
 
-    setTimeout(getSong, props.playbackOnProps.timeRemaining);
+    setTimeout(getSong, props.playbackOnProps.timeRemaining || 1500);
 
     
     
