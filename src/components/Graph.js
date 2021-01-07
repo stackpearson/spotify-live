@@ -55,6 +55,7 @@ const Graph = (props) => {
     </>)
 }
 
+
 const mapStateToProps = state => {
     return {
         graphOnProps: state.graphReducer

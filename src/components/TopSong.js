@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {setActiveFave, setSuggestions} from '../actions/favesActions';
 import {setGraphData} from '../actions/graphActions';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 
 const TopSong = (props) => {
@@ -12,14 +13,10 @@ const TopSong = (props) => {
     let history = useHistory();
 
     const getVisual = () => {
-        axios 
-        .get(`https://ds-bw-spotify.herokuapp.com/features/${encodeURI(props.songData.name)}`)
-        .then((res) => {
-            console.log('visuals', res)
-            props.setGraphData(res.data.features)
-        })
-        .catch((res) => {
-            console.log('failed visuals', res)
+        axiosWithAuth().get(`audio-features/${props.songData.id}`)
+        .then(res => {
+            console.log(res.data)
+            props.setGraphData(res.data)
         })
     }
 
