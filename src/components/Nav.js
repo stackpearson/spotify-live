@@ -5,7 +5,7 @@ import {logOut} from '../actions/userActions';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {setSongData, setTime, setPause, setPlay} from '../actions/playbackActions';
 import {Dropdown} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Icon } from '@iconify/react';
 
 const Nav = (props) => {
 
@@ -113,10 +113,10 @@ const Nav = (props) => {
                         <span>{props.playbackOnProps.songData.item.name}</span>
                     </div>
                     <div className='playback-control'>
-                            <div className='showButton' onClick={() => previousSong()}>&#129092;</div>
-                            <div className={`${props.playbackOnProps.isPlaying === false ? 'showButton' : 'hideButton'}`} onClick={() => playSong()}>&#9654;</div>
-                            <div className={`${props.playbackOnProps.isPlaying === true ? 'showButton' : 'hideButton'}`} onClick={() => pauseSong()}>&#9208;</div>
-                            <div className='showButton' onClick={() => nextSong()}>&#129094;</div>
+                            <div className='showButton' onClick={() => previousSong()}><Icon icon="cil:media-step-backward" /></div>
+                            <div className={`${props.playbackOnProps.isPlaying === false ? 'showButton' : 'hideButton'}`} onClick={() => playSong()}><Icon icon="cil:media-play" /></div>
+                            <div className={`${props.playbackOnProps.isPlaying === true ? 'showButton' : 'hideButton'}`} onClick={() => pauseSong()}><Icon icon="cil:media-pause" /></div>
+                            <div className='showButton' onClick={() => nextSong()}><Icon icon="cil:media-step-forward" /></div>
                     </div>
                 </div>
             </div>
